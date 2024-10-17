@@ -1,0 +1,86 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.roman;
+
+//        M 1000
+//        D 500
+//        C 100 
+//        L 50
+//        X 10
+//        V 5
+//        I 1
+//
+
+import java.util.Scanner;
+
+public class Roman {
+    
+    
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+         Roman roman = new Roman();
+       /*
+        String Roman1 = "MCXIV";
+        String Roman2 = "CCCLIX";
+        String Roman3 = "MDCLXVI";
+        
+       
+        int result1 = roman.converttext(Roman1);
+        System.out.println(result1);
+                                    
+        int result2 = roman.converttext(Roman2);
+        System.out.println(result2);
+        
+        int result3 = roman.converttext(Roman3);
+        System.out.println(result3);
+        
+        */
+       String input;
+        System.out.println("Enter the Roman Numerals 'M''D''C''L''X''V''I': ");
+        do{
+              System.out.print("Roman: ");
+             input = scanner.nextLine().trim();
+            int result = roman.converttext(input);
+            System.out.println("Value : " +result + "\n(enter: 'exit' to close)");
+            if (input.isEmpty()){
+                System.out.println("invalid input\n");
+                
+            }
+        }
+        while (!input.contains("exit"));
+        
+        
+        
+        System.out.println("GoodBye!");
+        scanner.close();
+    }
+    
+    public int converttext(String Romans){
+       int value = 0;
+       for (int i = 0; i < Romans.length(); i++){
+           int current = getvalue(Romans.charAt(i));
+           if (i + 1 < Romans.length() && current < getvalue(Romans.charAt(i + 1))){
+                value -= current;
+           }
+           else{
+                   value += current;
+                   }
+       }
+           return value;
+    }
+    public int getvalue(char letter){
+        return switch (letter) {
+            case 'M' -> 1000;
+            case 'D' -> 500;
+            case 'C' -> 100;
+            case 'L' -> 50;
+            case 'X' -> 10;
+            case 'V' -> 5;
+            case 'I' -> 1;
+            default -> 0;
+        };
+    }
+}
